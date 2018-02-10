@@ -4,21 +4,39 @@
 
 from PIL import Image
 import numpy as np
+import os
 
-im = Image.open("./testImages/test1.jpg")
-width, height = im.size
-pix = im.load()
+def averageRGB( filename ) :
+    im = Image.open( filename )
+    width, height = im.size
+    pix = im.load()
 
-result = np.array([0, 0, 0])
-for x in range(0, width) :
-    for y in range(0, height) :
-        pixel = pix[x, y]
-        result[0] += pixel[0]
-        result[1] += pixel[1]
-        result[2] += pixel[2]
+    result = np.array([0, 0, 0])
+    for x in range(0, width) :
+        for y in range(0, height) :
+            pixel = pix[x, y]
+            result[0] += pixel[0]
+            result[1] += pixel[1]
+            result[2] += pixel[2]
 
-result = np.divide(result, width * height)
-print(result)
+    result = np.divide(result, width * height)
+    return result
+
+
+
+#
+# Effective "main"
+#
+
+sampleRGB = []
+filenames = []
+
+path = os.getcwd() + "/testImage/"
+for filename in os.listdir(path) :
+    filenames.append("./testImage/" + filename)
+    sampleRGB.append( averageRGB("./testImage/" + filename) )
+
+
 
 #
 # showcasing
