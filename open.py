@@ -2,15 +2,32 @@
     Chris Jakins
 """
 
+#
+# Imports
+#
+
 from PIL import Image
 import numpy as np
 import os
+
+#
+# Globals
+#
+
+DOT = "."
+SLASH = "/"
+sampleImageDirectory = "testImage/"
+
+#
+# Math methods
+#
 
 def averageRGB( filename ) :
     im = Image.open( filename )
     width, height = im.size
     pix = im.load()
 
+    # could possibly optimize this
     result = np.array([0, 0, 0])
     for x in range(0, width) :
         for y in range(0, height) :
@@ -23,20 +40,34 @@ def averageRGB( filename ) :
     return result
 
 
+def twoNorm(x):
+    return np.linalg.norm(x, ord = 2)
 
+
+def cauchyShwarz(x, y):
+    
+
+# something like this, check docuentation for min
+def getMin(arr):
+    return np.min(arr)
 #
 # Effective "main"
 #
 
-sampleRGB = []
+sampleRGBAverages = []
+cauchyShwarzSimil = []
 filenames = []
+sampleCount = 0
 
-path = os.getcwd() + "/testImage/"
+path = os.getcwd() + SLASH + sampleImageDirectory
 for filename in os.listdir(path) :
-    filenames.append("./testImage/" + filename)
-    sampleRGB.append( averageRGB("./testImage/" + filename) )
+    filenames.append(DOT + SLASH + sampleImageDirectory + filename)
+    sampleRGBAverages.append(filenames[sampleCount])
+    sampleCount += 1
 
-
+for i in range(0, sampleCount):
+    cauchyShwarzSimil.append(cauchyShwarz(sampleRBGAverages[i], finalRGBAverage)
+    # find min_element
 
 #
 # showcasing
